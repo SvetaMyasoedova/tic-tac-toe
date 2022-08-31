@@ -10,35 +10,62 @@ h1 {
   background-size: 45px;
   display: inline-block;
   padding-left: 55px;
+  margin-bottom: 10px;
+}
+.result {
+  font-size: 35px;
+  margin-bottom: 10px;
+  font-family: Helvetica, sans-serif;
+  color: rgb(0, 250, 154);
 }
 
-.board-side {
-  flex: 1.5;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
+.result.yellow-txt {
+  color: rgb(255, 215, 0);
 }
 
+.wrapper {
+  margin: 0 auto; 
+  width: 430px;
+}
 .board {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  height: 30%;
-  width: 50%;
+  width: 450px;
+  height: 450px;
+  margin-bottom: 10px;
 }
 
 .board-square {
-  width: 100%;
-  padding-top: 60%;
-  border: 0.2em solid rgba(255, 140, 0, 0.4);
-  cursor: pointer;
+  width: 150px;
+  height: 150px;
+  float: left;
+  border: 0.5px solid rgba(255, 140, 0, 0.4);
   box-sizing: border-box;
-  text-overflow: clip;
+  font-size: 50px;
+  font-family: 'Rock Salt', cursive;
+  color: rgb(255, 255, 0);
+  text-align: center;
+  line-height: 3em;
+}
+
+.board-square.green {
+  color: rgb(0, 250, 154);
+}
+.board-square.active-x {
+  border:  7px solid  rgb(255, 255, 0);
+  transition: all 0.3s 0s ease;
+}
+.board-square.active-o {
+  border:  7px solid rgb(0, 250, 154);
+  transition: all 0.3s 0s ease;
+}
+.board.active-tie {
+  border:  7px solid rgb(255, 160, 122);
+  transition: all 0.3s 0s ease;
 }
 
 .board-square:hover {
   box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 }
 
 #restart-game {
@@ -48,7 +75,7 @@ h1 {
   border-radius: 25px;
   box-sizing: border-box;
   text-decoration: none;
-  font-family:  Helvetica, sans-serif;
+  font-family: Helvetica, sans-serif;
   font-size: 25px;
   color: white;
   text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
