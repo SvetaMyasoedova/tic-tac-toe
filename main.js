@@ -4,6 +4,7 @@ let board = document.querySelector(".board");
 let allBoardSquare = document.querySelectorAll(".board-square");
 let resultText = document.querySelector(".result");
 let count = 0;
+let gameover = false;
 
 //add Event Listener
 board.addEventListener("click", addMark);
@@ -12,6 +13,10 @@ restartButtton.addEventListener("click", newGame);
 //add X or O on board
 let step = 0;
 function addMark(event) {
+  if (gameover) {
+    return;
+  }
+
   if (
     event.target.className == "board-square" &&
     event.target.textContent == ""
@@ -30,6 +35,7 @@ function addMark(event) {
     }
 
     step++;
+
     checkWinner();
   }
 }
@@ -57,8 +63,7 @@ function checkWinner() {
       allBoardSquare[winCombinations[i][2]].classList.add("active-x");
       resultText.classList.toggle("yellow-txt");
       resultText.innerHTML = "X wins the game";
-
-      board.removeEventListener("click", addMark);
+      gameover = true;
     } else if (
       allBoardSquare[winCombinations[i][0]].innerHTML == "O" &&
       allBoardSquare[winCombinations[i][1]].innerHTML == "O" &&
@@ -69,12 +74,11 @@ function checkWinner() {
       allBoardSquare[winCombinations[i][2]].classList.add("active-o");
       resultText.classList.toggle("yellow-txt");
       resultText.innerHTML = "O wins the game";
-
-      board.removeEventListener("click", addMark);
+      gameover = true;
     } else if (count == 9) {
       resultText.innerHTML = "It's a tie!";
       board.classList.add("active-tie");
-      board.removeEventListener("click", addMark);
+      gameover = true;
     }
   }
 }
@@ -85,10 +89,12 @@ function newGame() {
   count = 0;
   resultText.innerHTML = "o's turn";
   board.classList.remove("active-tie");
-  board.addEventListener("click", addMark);
+  gameover = false;
+  //board.addEventListener("click", addMark);
   allBoardSquare.forEach((elem) => {
     elem.innerHTML = "";
     elem.classList.remove("active-x");
+    elem.classList.remove("green");
     elem.classList.remove("active-o");
   });
 }
